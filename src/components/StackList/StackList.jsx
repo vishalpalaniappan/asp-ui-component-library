@@ -22,6 +22,7 @@ export const StackList = ({traces}) => {
     const generateStackList = () => {
         const traceList = traces.map(trace => 
             <TraceNode 
+                key={`${trace.fileName}-${trace.lineNumber}-${trace.functionName}`}
                 functionName={trace.functionName}
                 fileName={trace.fileName}
                 lineNumber={trace.lineNumber}             
