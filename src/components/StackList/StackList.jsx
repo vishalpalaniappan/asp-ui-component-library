@@ -1,6 +1,6 @@
-import "./Sample.scss";
+import "./StackList.scss";
 
-export const Sample = ({title}) => {
+export const StackList = ({title}) => {
     return <>
         <span className="test">{title}</span>
     </>;
