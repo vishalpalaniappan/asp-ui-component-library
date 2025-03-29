@@ -1,0 +1,11 @@
+.rootContainer {
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+}
+
+.stackContainer {
+    height: 200px;
+    width: 300px;
+    background-color: #1b1c1d;
+}
