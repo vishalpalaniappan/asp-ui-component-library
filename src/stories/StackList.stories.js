@@ -6,7 +6,7 @@ import { action } from "@storybook/addon-actions";
 import "./StackList.scss"
 
 export default {
-    title: 'StackList', 
+    title: 'CallStack', 
     component: StackList,
     argTypes: {
         traces: {
@@ -41,9 +41,41 @@ const Template = (args) => {
     )
 }
 
-export const StackTypeA = Template.bind({})
 
-StackTypeA.args = {
+export const Default = Template.bind({})
+
+Default.args = {
+    traces: [
+        {functionName:"visit_arg", fileName: "helper.py", lineNumber: 3},
+        {functionName:"__init__", fileName: "helper.py", lineNumber: 65},
+        {functionName:"injectLogTypesA", fileName: "LogInjector.py", lineNumber: 3, selected: true},
+        {functionName:"visit_import", fileName: "LogInjector.py", lineNumber: 3},
+        {functionName:"__init__", fileName: "LogInjector.py", lineNumber: 65},
+        {functionName:"run", fileName: "ProgramProcessor.py", lineNumber: 3},
+        {functionName:"main", fileName: "main.py", lineNumber: 3},
+        {functionName:"<module>", fileName: "main.py", lineNumber: 65}
+    ]
+}
+
+
+export const StackTopSelected = Template.bind({})
+
+StackTopSelected.args = {
+    traces: [
+        {functionName:"visit_arg", fileName: "helper.py", lineNumber: 3, selected: true},
+        {functionName:"__init__", fileName: "helper.py", lineNumber: 65},
+        {functionName:"injectLogTypesA", fileName: "LogInjector.py", lineNumber: 3},
+        {functionName:"visit_import", fileName: "LogInjector.py", lineNumber: 3},
+        {functionName:"__init__", fileName: "LogInjector.py", lineNumber: 65},
+        {functionName:"run", fileName: "ProgramProcessor.py", lineNumber: 3},
+        {functionName:"main", fileName: "main.py", lineNumber: 3},
+        {functionName:"<module>", fileName: "main.py", lineNumber: 65}
+    ]
+}
+
+export const WithException = Template.bind({})
+
+WithException.args = {
     traces: [
         {functionName:"visit_arg", fileName: "helper.py", hasException: true,  lineNumber: 3, selected: true},
         {functionName:"__init__", fileName: "helper.py", lineNumber: 65},
