@@ -7,14 +7,26 @@ const ROW_STYLE =  {
     SELECTED_TOP: "#4b4b18"
 }
 
-const TraceNode = ({index, functionName, fileName, lineNumber, selected, selectTraceItem, hasException}) => {
+/**
+ * Renders a row in the stack list component.
+ * 
+ * @param {Number} index 
+ * @param {String} functionName 
+ * @param {String} fileName 
+ * @param {Number} lineNumber 
+ * @param {Boolean} selected 
+ * @param {Function} selectTraceItem 
+ * @param {Boolean} hasException 
+ * @return {JSX}
+ */
+const StackRow = ({index, functionName, fileName, lineNumber, selected, selectTraceItem, hasException}) => {
 
     let style = {};
     if (selected && index === 0) {
-        // Top of stack
+        // Style for top of stack
         style = {backgroundColor: hasException ? ROW_STYLE.EXCEPTION : ROW_STYLE.SELECTED_TOP};
     } else if (selected) {
-        // Rest of stack
+        // Style for rest of stack
         style = {backgroundColor: hasException ? ROW_STYLE.EXCEPTION : ROW_STYLE.SELECTED};
     }
 
@@ -31,7 +43,7 @@ const TraceNode = ({index, functionName, fileName, lineNumber, selected, selectT
     )
 }
 
-TraceNode.propTypes = {
+StackRow.propTypes = {
     index: PropTypes.number,
     functionName: PropTypes.string,
     fileName: PropTypes.string,
@@ -41,11 +53,18 @@ TraceNode.propTypes = {
     hasException: PropTypes.bool,
 }
 
+/**
+ * Renders the stack list component.
+ * 
+ * @param {Array} traces 
+ * @param {Function} selectTraceItem 
+ * @return {JSX}
+ */
 export const StackList = ({traces, selectTraceItem}) => {
 
     const generateStackList = () => {
         const traceList = traces.map((trace, index) => {
-            return <TraceNode 
+            return <StackRow 
                 key={`${trace.fileName}-${trace.lineNumber}-${trace.functionName}`}
                 functionName={trace.functionName}
                 fileName={trace.fileName}
