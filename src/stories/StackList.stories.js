@@ -19,9 +19,9 @@ const Template = (args) => {
     )
 }
 
-export const DefaultList = Template.bind({})
+export const StackTypeA = Template.bind({})
 
-DefaultList.args = {
+StackTypeA.args = {
     traces: [
         {functionName:"visit_arg", fileName: "helper.py", lineNumber: 3},
         {functionName:"__init__", fileName: "helper.py", lineNumber: 65},
@@ -31,5 +31,8 @@ DefaultList.args = {
         {functionName:"run", fileName: "ProgramProcessor.py", lineNumber: 3},
         {functionName:"main", fileName: "main.py", lineNumber: 3},
         {functionName:"<module>", fileName: "main.py", lineNumber: 65}
-    ]
+    ],
+    onSelectStackPos: () => {
+        console.log("Selecting item");
+    }
 }

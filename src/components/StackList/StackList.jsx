@@ -2,10 +2,10 @@ import "./StackList.scss";
 import PropTypes from 'prop-types';
 
 
-const TraceNode = ({functionName, fileName, lineNumber}) => {
+const TraceNode = ({index, functionName, fileName, lineNumber, onSelectStackPos}) => {
 
     return (
-        <div className="stackRow">
+        <div className="stackRow" onClick={onSelectStackPos}>
             <div className="left">
                 <span className="functionName">{functionName}</span>
             </div>
@@ -17,15 +17,17 @@ const TraceNode = ({functionName, fileName, lineNumber}) => {
     )
 }
 
-export const StackList = ({traces}) => {
+export const StackList = ({traces, onSelectStackPos}) => {
 
     const generateStackList = () => {
-        const traceList = traces.map(trace => 
+        const traceList = traces.map((trace, index) => 
             <TraceNode 
                 key={`${trace.fileName}-${trace.lineNumber}-${trace.functionName}`}
                 functionName={trace.functionName}
                 fileName={trace.fileName}
-                lineNumber={trace.lineNumber}             
+                lineNumber={trace.lineNumber}     
+                index={index}    
+                onSelectStackPos={onSelectStackPos}
             />
         );
         return traceList;
@@ -39,5 +41,6 @@ export const StackList = ({traces}) => {
 }
 
 StackList.propTypes = {
-    traces: PropTypes.array
+    traces: PropTypes.array,
+    selectTraceItem: PropTypes.func,
 }
