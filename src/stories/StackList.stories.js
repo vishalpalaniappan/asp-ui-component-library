@@ -1,4 +1,4 @@
-import { useCallback, useEffect } from "react";
+import { useEffect } from "react";
 import { StackList } from "../components/StackList";
 import "./StackList.scss"
 import { useArgs } from "@storybook/preview-api";
@@ -10,20 +10,15 @@ export default {
     argTypes: {
         traces: {
             type: 'array'
-        },
-        selectTraceItem: {
-            action: "changed"
         }
     }
 };
 
-
 const Template = (args) => {
     const [, updateArgs] = useArgs();
-
-    // Update the selected row
+    
     const selectTraceItem = (selectedIndex) => {
-        action('Selected Row:')(selectedIndex);
+        action('Selected Stack Position:')(selectedIndex);
         const newTraces = [];
         args.traces.forEach((value, index) => {
             value.selected = (selectedIndex == index);
@@ -49,7 +44,7 @@ export const StackTypeA = Template.bind({})
 
 StackTypeA.args = {
     traces: [
-        {functionName:"visit_arg", fileName: "helper.py", lineNumber: 3, selected: true},
+        {functionName:"visit_arg", fileName: "helper.py", hasException: true,  lineNumber: 3, selected: true},
         {functionName:"__init__", fileName: "helper.py", lineNumber: 65},
         {functionName:"injectLogTypesA", fileName: "LogInjector.py", lineNumber: 3},
         {functionName:"visit_import", fileName: "LogInjector.py", lineNumber: 3},

@@ -1,15 +1,21 @@
-import { P } from "storybook/internal/components";
 import "./StackList.scss";
 import PropTypes from 'prop-types';
 
+const ROW_STYLE =  {
+    SELECTED: "#184b2d",
+    EXCEPTION: "#420b0e",
+    SELECTED_TOP: "#4b4b18"
+}
 
-const TraceNode = ({index, functionName, fileName, lineNumber, selected, selectTraceItem}) => {
+const TraceNode = ({index, functionName, fileName, lineNumber, selected, selectTraceItem, hasException}) => {
 
-    let style = {}
-    if (selected && index == 0) {
-        style= {backgroundColor:"#4b4b18"};
+    let style = {};
+    if (selected && index === 0) {
+        // Top of stack
+        style = {backgroundColor: hasException ? ROW_STYLE.EXCEPTION : ROW_STYLE.SELECTED_TOP};
     } else if (selected) {
-        style= {backgroundColor:"#184b2d"};
+        // Rest of stack
+        style = {backgroundColor: hasException ? ROW_STYLE.EXCEPTION : ROW_STYLE.SELECTED};
     }
 
     return (
@@ -32,6 +38,7 @@ TraceNode.propTypes = {
     lineNumber: PropTypes.number,
     selected: PropTypes.bool,
     onSelectStackPos: PropTypes.func,
+    hasException: PropTypes.bool,
 }
 
 export const StackList = ({traces, selectTraceItem}) => {
@@ -43,7 +50,8 @@ export const StackList = ({traces, selectTraceItem}) => {
                 functionName={trace.functionName}
                 fileName={trace.fileName}
                 lineNumber={trace.lineNumber}     
-                selected={trace.selected}
+                selected={trace.selected}  
+                hasException={trace.hasException}
                 index={index}    
                 selectTraceItem={selectTraceItem}
             />
