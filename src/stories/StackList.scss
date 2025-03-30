@@ -1,7 +1,9 @@
 .rootContainer {
     display: flex;
     justify-content: center;
+    align-items: center;
     flex-direction: row;
+    padding: 100px;
 }
 
 .stackContainer {

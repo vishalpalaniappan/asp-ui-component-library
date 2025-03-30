@@ -1,11 +1,20 @@
+import { P } from "storybook/internal/components";
 import "./StackList.scss";
 import PropTypes from 'prop-types';
 
 
-const TraceNode = ({index, functionName, fileName, lineNumber, onSelectStackPos}) => {
+const TraceNode = ({index, functionName, fileName, lineNumber, selected, selectTraceItem}) => {
+
+    let style = {}
+    if (selected && index == 0) {
+        style= {backgroundColor:"#4b4b18"};
+    } else if (selected) {
+        style= {backgroundColor:"#184b2d"};
+    }
+
 
     return (
-        <div className="stackRow" onClick={onSelectStackPos}>
+        <div className="stackRow" style={style} onClick={(e) => selectTraceItem(e, index)}>
             <div className="left">
                 <span className="functionName">{functionName}</span>
             </div>
@@ -17,18 +26,29 @@ const TraceNode = ({index, functionName, fileName, lineNumber, onSelectStackPos}
     )
 }
 
-export const StackList = ({traces, onSelectStackPos}) => {
+TraceNode.propTypes = {
+    index: PropTypes.number,
+    functionName: PropTypes.string,
+    fileName: PropTypes.string,
+    lineNumber: PropTypes.number,
+    selected: PropTypes.bool,
+    onSelectStackPos: PropTypes.func,
+}
+
+export const StackList = ({traces, selectTraceItem}) => {
 
     const generateStackList = () => {
-        const traceList = traces.map((trace, index) => 
-            <TraceNode 
+        const traceList = traces.map((trace, index) => {
+            return <TraceNode 
                 key={`${trace.fileName}-${trace.lineNumber}-${trace.functionName}`}
                 functionName={trace.functionName}
                 fileName={trace.fileName}
                 lineNumber={trace.lineNumber}     
+                selected={trace.selected}
                 index={index}    
-                onSelectStackPos={onSelectStackPos}
+                selectTraceItem={selectTraceItem}
             />
+        }
         );
         return traceList;
     }
