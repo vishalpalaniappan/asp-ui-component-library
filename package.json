@@ -33,6 +33,7 @@
     "@rollup/plugin-terser": "^0.4.4",
     "@storybook/addon-essentials": "^8.6.8",
     "@storybook/addon-interactions": "^8.6.8",
+    "@storybook/addon-actions": "^8.6.11",
     "@storybook/addon-onboarding": "^8.6.8",
     "@storybook/addon-webpack5-compiler-swc": "^3.0.0",
     "@storybook/blocks": "^8.6.8",
@@ -58,8 +59,5 @@
   "peerDependencies": {
     "react": "^19.0.0",
     "react-dom": "^19.0.0"
-  },
-  "dependencies": {
-    "@storybook/addon-actions": "^8.6.11"
   }
 }

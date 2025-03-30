@@ -1,8 +1,9 @@
 import { useEffect } from "react";
 import { StackList } from "../components/StackList";
-import "./StackList.scss"
 import { useArgs } from "@storybook/preview-api";
 import { action } from "@storybook/addon-actions";
+
+import "./StackList.scss"
 
 export default {
     title: 'StackList', 
