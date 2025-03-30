@@ -12,9 +12,8 @@ const TraceNode = ({index, functionName, fileName, lineNumber, selected, selectT
         style= {backgroundColor:"#184b2d"};
     }
 
-
     return (
-        <div className="stackRow" style={style} onClick={(e) => selectTraceItem(e, index)}>
+        <div className="stackRow" style={style} onClick={(e) => selectTraceItem(index)}>
             <div className="left">
                 <span className="functionName">{functionName}</span>
             </div>

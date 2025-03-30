@@ -22,8 +22,8 @@ const Template = (args) => {
     const [, updateArgs] = useArgs();
 
     // Update the selected row
-    const selectTraceItem = (e, selectedIndex) => {
-        action('click')(e);
+    const selectTraceItem = (selectedIndex) => {
+        action('Selected Row:')(selectedIndex);
         const newTraces = [];
         args.traces.forEach((value, index) => {
             value.selected = (selectedIndex == index);
