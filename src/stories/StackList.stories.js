@@ -2,22 +2,28 @@ import { useCallback, useEffect } from "react";
 import { StackList } from "../components/StackList";
 import "./StackList.scss"
 import { useArgs } from "@storybook/preview-api";
-import { fn } from '@storybook/test';
+import { action } from "@storybook/addon-actions";
 
 export default {
     title: 'StackList', 
     component: StackList,
     argTypes: {
-        traces: [],
-        selectTraceItem: fn()
+        traces: {
+            type: 'array'
+        },
+        selectTraceItem: {
+            action: "changed"
+        }
     }
 };
 
-const Template = (args) => {
 
+const Template = (args) => {
     const [, updateArgs] = useArgs();
 
+    // Update the selected row
     const selectTraceItem = (e, selectedIndex) => {
+        action('click')(e);
         const newTraces = [];
         args.traces.forEach((value, index) => {
             value.selected = (selectedIndex == index);
@@ -33,7 +39,7 @@ const Template = (args) => {
     return (
         <div className="rootContainer">
             <div className="stackContainer">
-                <StackList {...args} /> 
+                <StackList  {...args}/> 
             </div>
         </div>
     )
