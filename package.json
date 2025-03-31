@@ -1,6 +1,6 @@
 {
-  "name": "asp-ui-component-library",
-  "version": "0.0.1",
+  "name": "asp-react-component-library",
+  "version": "0.0.3",
   "description": "Library of react UI components across multiple applications.",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
@@ -31,9 +31,9 @@
     "@rollup/plugin-commonjs": "^28.0.3",
     "@rollup/plugin-node-resolve": "^16.0.1",
     "@rollup/plugin-terser": "^0.4.4",
+    "@storybook/addon-actions": "^8.6.11",
     "@storybook/addon-essentials": "^8.6.8",
     "@storybook/addon-interactions": "^8.6.8",
-    "@storybook/addon-actions": "^8.6.11",
     "@storybook/addon-onboarding": "^8.6.8",
     "@storybook/addon-webpack5-compiler-swc": "^3.0.0",
     "@storybook/blocks": "^8.6.8",
@@ -57,7 +57,7 @@
     "style-loader": "^4.0.0"
   },
   "peerDependencies": {
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0"
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
   }
 }
