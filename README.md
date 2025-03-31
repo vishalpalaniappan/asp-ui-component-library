@@ -12,19 +12,19 @@ For instructions on how to use the component, please refer to the relevant stori
 ## Usage
 
 Run Storybook
-'''
+```
 npm run storybook
-'''
+```
 
 Build Storybook
-'''
+```
 npm run build-storybook
-'''
+```
 
 Build the library:
-'''
+```
 npm run build
-'''
+```
 
 ## Testing Locally
 
