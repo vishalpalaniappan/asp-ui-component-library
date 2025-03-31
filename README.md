@@ -2,16 +2,16 @@ This repo contains a collection of react components that will be reused across m
 
 Here is a link to the [storybook](https://vishalpalaniappan.github.io/asp-ui-component-library/) with the components.
 
-## Installing the library
+## Using the library
 
 To install the library install the following NPM package
 ```
 npm i asp-react-component-library
 ```
 
-For instructions on how to use the component, please refer to the relevant stories. More detailed documentation about each component will be added soon.
+For examples of how to use each component, please refer to the relevant stories. More detailed documentation about each component will be added soon.
 
-## Usage
+## Developing
 
 Run Storybook:
 ```
