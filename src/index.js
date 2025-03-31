@@ -1,3 +1,1 @@
-import { StackList } from "./components/StackList";
-
-export default StackList;
+export * from "./components/StackList";
