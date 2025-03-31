@@ -3,7 +3,7 @@ import { StackList } from "../components/StackList";
 import { useArgs } from "@storybook/preview-api";
 import { action } from "@storybook/addon-actions";
 
-import "./StackList.scss"
+import "./StackListStories.scss"
 
 export default {
     title: 'CallStack', 
