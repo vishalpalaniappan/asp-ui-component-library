@@ -2,9 +2,14 @@
 
 .tab {
     background-color: #2d2d2d;
-    padding: 0 10px;
 }
 
 .activeTab {
     background-color: #1e1e1e;
+}
+
+.tabsContainer {
+    display: flex;
+    flex-direction: row;
+    height: 100%;
 }
