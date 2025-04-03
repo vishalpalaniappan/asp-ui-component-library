@@ -1,8 +1,8 @@
-import { useEffect, useState } from "react";
+import { useRef, useEffect, useState, useCallback } from "react";
 import "./Tabs.scss";
 import PropTypes from 'prop-types';
 
-import { Tab } from "./Tab/Tab";
+import {Tab} from "./Tab/Tab"
 
 
 /**
@@ -12,37 +12,33 @@ import { Tab } from "./Tab/Tab";
  */
 export const Tabs = ({files}) => {
 
-    const [tabsList, setTabsList] = useState(<></>)
+    const [activeTab, setActiveTab] = useState();
+    const [tabsList, setTabsList] = useState([]);
 
-    const selectTab = (index) => {
-        console.log("selecting", index);
-        console.log(files[index].content)
+    // Select a tab
+    const selectTab = (e, file) => {
+        console.log(file);
+        setActiveTab(file.path);
     }
 
-    const loadTabs = (files) => {
-        const _tabsList = [];
-
-        files.forEach((tab, index) => {
-            _tabsList.push(
-                <Tab selectTab={selectTab}
-                    index={index}
-                    key={tab.path}
-                    name={tab.fileName} />
-            );
-        });
-
-        setTabsList(_tabsList);
+    const closeTab = (e, file) => {
+        // const currTabsList = [...tabsList];
+        // currTabsList.splice(tabsList.indexOf(file), 1);
+        // setTabsList(currTabsList);        
     }
 
+    // Set initial tabs from the files prop
     useEffect(() => {
         if (files) {
-            loadTabs(files);
+            setTabsList(files);
         }
     }, [files]);
     
     return (
         <div className="tabsContainer">
-            {tabsList}
+            {tabsList.map(function(file) {
+                return <Tab file={file} key={file.path} activeTab={activeTab} selectTab={selectTab}/>
+            })}
         </div>
     );
 }

@@ -2,8 +2,8 @@ import "./Viewer.scss";
 import PropTypes from 'prop-types';
 
 import { MonacoInstance } from "./MonacoInstance/MonacoInstance";
-import { Tabs } from "./Tabs/Tabs";
 import { useEffect, useState } from "react";
+import { Tabs } from "./Tabs/Tabs";
 
 /**
  * Renders the viewer component with support for tabs.
@@ -15,7 +15,7 @@ export const Viewer = ({files}) => {
     return (
         <div className="viewerContainer d-flex flex-column">
 
-            <div className="tabContainer">
+            <div className="tabsGutter">
                 <Tabs files={files}/>
             </div>
 

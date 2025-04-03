@@ -4,8 +4,13 @@
     height: 100%;
 }
 
-.tabContainer {
+.tabsGutter {
     height: 30px;
     width: 100%;
     background-color: #252526;
+}
+
+.tabsContainer {
+    display: flex;
+    flex-direction: row;
 }
