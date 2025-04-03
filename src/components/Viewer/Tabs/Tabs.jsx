@@ -1,4 +1,4 @@
-import { useRef, useEffect, useState, useCallback } from "react";
+import { useEffect, useState } from "react";
 import "./Tabs.scss";
 import PropTypes from 'prop-types';
 
@@ -6,7 +6,7 @@ import {Tab} from "./Tab/Tab"
 
 
 /**
- * Renders the tab component.
+ * Renders the tabs component.
  * 
  * @return {JSX}
  */
@@ -15,9 +15,7 @@ export const Tabs = ({files}) => {
     const [activeTab, setActiveTab] = useState();
     const [tabsList, setTabsList] = useState([]);
 
-    // Select a tab
     const selectTab = (e, file) => {
-        console.log(file);
         setActiveTab(file.path);
     }
 
@@ -27,7 +25,6 @@ export const Tabs = ({files}) => {
         setTabsList(currTabsList);     
     }
 
-    // Set initial tabs from the files prop
     useEffect(() => {
         if (files) {    
             setTabsList(files);

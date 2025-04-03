@@ -13,7 +13,7 @@ export const Tab = ({file, activeTab, selectTab, closeTab}) => {
 
     const getTabStyle = () => {
         return {
-            backgroundColor: (activeTab == file.path)?'red':'green'
+            backgroundColor: (activeTab == file.path)?'#1e1e1e':'#2d2d2d'
         };
     }
     
@@ -23,7 +23,7 @@ export const Tab = ({file, activeTab, selectTab, closeTab}) => {
                 {file.fileName}
             </div>
             <div className="close" onClick={(e) => closeTab(e, file)}>
-                <X />
+                <X style={{color:"white"}}/>
             </div>
         </div>
     );
