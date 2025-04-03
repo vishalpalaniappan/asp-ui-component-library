@@ -22,14 +22,14 @@ export const Tabs = ({files}) => {
     }
 
     const closeTab = (e, file) => {
-        // const currTabsList = [...tabsList];
-        // currTabsList.splice(tabsList.indexOf(file), 1);
-        // setTabsList(currTabsList);        
+        const currTabsList = [...tabsList];
+        currTabsList.splice(tabsList.indexOf(file), 1);
+        setTabsList(currTabsList);     
     }
 
     // Set initial tabs from the files prop
     useEffect(() => {
-        if (files) {
+        if (files) {    
             setTabsList(files);
         }
     }, [files]);
@@ -37,7 +37,13 @@ export const Tabs = ({files}) => {
     return (
         <div className="tabsContainer">
             {tabsList.map(function(file) {
-                return <Tab file={file} key={file.path} activeTab={activeTab} selectTab={selectTab}/>
+                return <Tab 
+                    file={file} 
+                    key={file.path} 
+                    activeTab={activeTab} 
+                    selectTab={selectTab}
+                    closeTab={closeTab}
+                />
             })}
         </div>
     );

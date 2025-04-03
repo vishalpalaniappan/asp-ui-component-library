@@ -1,6 +1,7 @@
-import { useRef, useEffect, useState, useCallback } from "react";
 import "./Tab.scss";
 import PropTypes from 'prop-types';
+
+import { X } from "react-bootstrap-icons";
 
 
 /**
@@ -8,15 +9,22 @@ import PropTypes from 'prop-types';
  * 
  * @return {JSX}
  */
-export const Tab = ({file, activeTab, selectTab}) => {
+export const Tab = ({file, activeTab, selectTab, closeTab}) => {
+
+    const getTabStyle = () => {
+        return {
+            backgroundColor: (activeTab == file.path)?'red':'green'
+        };
+    }
     
     return (
-        <div onClick={(e) => selectTab(e, file)}
-            className="tab"
-            style={{backgroundColor: (activeTab == file.path)?'red':'green'}}
-            index={file.path}
-            key={file.path}>
-            {file.fileName}
+        <div onClick={(e) => selectTab(e, file)} className="tab" style={getTabStyle()}>
+            <div className="fileName">
+                {file.fileName}
+            </div>
+            <div className="close" onClick={(e) => closeTab(e, file)}>
+                <X />
+            </div>
         </div>
     );
 }
