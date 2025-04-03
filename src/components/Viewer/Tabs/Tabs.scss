@@ -12,4 +12,44 @@
     display: flex;
     flex-direction: row;
     height: 100%;
+    flex-grow: 1;
+    overflow-x: auto;
+    scrollbar-gutter: stable;
+    scrollbar-color: #47474766 #1e1e1e;
+    scrollbar-width: thin;
+}
+
+.tabsGutter {
+    display: flex;
+    flex-direction: row;
+    width:100%;
+}
+
+.tabsDropdown {
+    float: right;
+    display: flex;
+    align-items: center;
+    color:white;
+    padding: 0 10px;
+}
+
+.tabSelect {
+    border: none;
+    border-radius: 0;
+    background: #252526;
+    color: white;
+}
+
+.dropdown-menu {
+    border-radius: 0 !important;
+    padding: 0 !important;
+}
+
+.dropdown-item {
+    font-size:11px;
+}
+
+.dropdown-header {
+    font-size:12px !important;
+    padding-bottom:5px !important;
 }

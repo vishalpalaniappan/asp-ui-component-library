@@ -3,6 +3,8 @@ import { Viewer } from "../components/Viewer";
 import { useArgs } from "@storybook/preview-api";
 import { action } from "@storybook/addon-actions";
 
+import fileTrees from "./filetree.json";
+
 import "./ViewerStories.scss"
 
 export default {
@@ -13,17 +15,16 @@ export default {
 
 const Template = (args) => {
     return (
-        <Viewer {...args} />
+        <div className="viewerContainer">
+            <Viewer {...args} />
+        </div>
     )
 }
 
 export const Default = Template.bind({})
 
+console.log(fileTrees);
+
 Default.args = {
-    files: [
-        {program:"ProgramA", fileName:"server.py", path:"server.py", main: true, content: "Content of server.py"},
-        {program:"ProgramA", fileName:"queryHandler.py", path:"app/queryHandler.py", content: "Content of queryHandler.py"},
-        {program:"ProgramA", fileName:"variable.py", path:"app/variable.py", content: "Content of variable.py"},
-        {program:"ProgramA", fileName:"logtype.py", path:"app/logtype.py", content: "Content of logtype.py"}
-    ]
+    systemTree: fileTrees.fileTrees
 }

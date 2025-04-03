@@ -1,23 +1,39 @@
-import React, { useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 import Editor from '@monaco-editor/react';
 
 import "./MonacoInstance.scss"
 
-export const MonacoInstance = () => {
-  const editorRef = useRef(null);
+export const MonacoInstance = ({editorContent}) => {
+    const editorRef = useRef(null);
 
-  function handleEditorDidMount(editor, monaco) {
-    editorRef.current = editor;
-  }
+    const content = useRef();
 
-  return (
-    <Editor
-    height="90vh"
-    defaultLanguage="javascript"
-    defaultValue="// some comment"
-    onMount={handleEditorDidMount}
-    theme="vs-dark"
-    />
-  );
+    const handleEditorDidMount = (editor, monaco) => {
+        editorRef.current = editor;
+        if(content?.current) {
+            editorRef.current.setValue(content.current);
+        }
+    }
+
+    useEffect(() => {
+        content.current = editorContent;
+        if (editorRef?.current && content.current) {
+            editorRef.current.setValue(content.current);
+        }
+    }, [editorContent]);
+
+    return (
+        <Editor
+            height="100vh"
+            defaultLanguage="python"
+            defaultValue="// some comment"
+            onMount={handleEditorDidMount}
+            theme="vs-dark"
+            options={{
+                scrollBeyondLastLine:false,
+                fontSize:"12px"
+            }}
+        />
+    );
 }

@@ -10,17 +10,61 @@ import { Tabs } from "./Tabs/Tabs";
  * 
  * @return {JSX}
  */
-export const Viewer = ({files}) => {
+export const Viewer = ({systemTree}) => {
+
+    const [files, setFiles] = useState();
+    const [fileContent, setFileContent] = useState();
+    const [editorContent, setEditorContent] = useState();
+
+    // Parse system tree into list with necessary information for tabs component
+    useEffect(() => {
+        const files = [];
+        const content = {};
+
+        for (const program in systemTree) {
+            for (const filePath in systemTree[program]) {
+                const file = systemTree[program][filePath];
+                const key = program + "_" + filePath;
+                const info = {
+                    program: program,
+                    key: key,
+                    fileName: filePath.split("/").slice(-1),
+                    path: filePath
+                }
+                content[key] = file.source
+                files.push(info);
+            }
+        }
+
+        if (files.length == 0) {
+            setEditorContent("Select file using file navigator or drop down on top right.");
+            setFileContent({});
+            setFiles([]);
+        } else {
+            setFileContent(content);
+            setFiles(files);
+        }
+
+    }, [systemTree])
+
+
+    const selectFile = (fileKey) => {
+        if (fileKey) {
+            setEditorContent(fileContent[fileKey]);
+        } else {
+            setEditorContent("Select file using file navigator or drop down on top right.");
+        }
+    }
     
     return (
         <div className="viewerContainer d-flex flex-column">
 
             <div className="tabsGutter">
-                <Tabs files={files}/>
+                <Tabs files={files} selectFile={selectFile} systemTree={systemTree}/>
             </div>
 
             <div className="d-flex flex-grow-1">
-                <MonacoInstance />
+                <MonacoInstance editorContent={editorContent}/>
             </div>
 
         </div>
