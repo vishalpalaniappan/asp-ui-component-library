@@ -77,7 +77,7 @@ export const Tabs = ({files, selectFile, systemTree}) => {
             selectFile(null);
             setActiveTab(null);
         } else {
-            const newIndex = (index >= currTabsList.length)?currTabsList.length:index;
+            const newIndex = (index >= currTabsList.length)?currTabsList.length - 1:index;
             setActiveTab(currTabsList[newIndex].key);
             selectFile(currTabsList[newIndex].key);
         }
