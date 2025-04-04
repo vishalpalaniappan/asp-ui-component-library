@@ -1,20 +1,17 @@
 import React, { useEffect, useState } from "react";
-import "./Tabs.scss";
 import PropTypes from 'prop-types';
 
-import { ChevronDown } from "react-bootstrap-icons";
-
+import {ChevronDown} from "react-bootstrap-icons";
 import {Tab} from "./Tab/Tab"
-
-import 'bootstrap/dist/css/bootstrap.css';
 
 import Dropdown from 'react-bootstrap/Dropdown';
 
+import 'bootstrap/dist/css/bootstrap.css';
+import "./Tabs.scss";
+
 // Dropdown needs access to the DOM node in order to position the Menu
 const SelectFileToggle = React.forwardRef(({ children, onClick }, ref) => (
-    <a  href=""
-        ref={ref}
-        onClick={(e) => { e.preventDefault(); onClick(e); }}>
+    <a ref={ref} onClick={(e) => { e.preventDefault(); onClick(e); }}>
         {children}
     </a>
 ));
@@ -29,24 +26,22 @@ export const Tabs = ({files, selectFile, systemTree}) => {
     const [activeTab, setActiveTab] = useState(null);
     const [tabsList, setTabsList] = useState([]);
 
-    // Select the tab
     const selectTab = (e, file) => {
         setActiveTab(file.key);
         selectFile(file.key)
     }
 
-    // Add a tab
     const addTab = (key) => {
         const currTabsList = [...tabsList];
 
-        let hasKey;
-        currTabsList.forEach((tab, index) => {
-            if (currTabsList[index].key == key) {
-                hasKey = true;
-            }
-        });
+        let hasKey = currTabsList.find((tab) => tab.key == key)
 
-        if (!hasKey) {
+        if (hasKey) {
+            // Set the active tab and select the file.
+            setActiveTab(key);
+            selectFile(key);
+        } else {
+            // Add tab to the tabs list.
             files.forEach((file, index) => {
                 if (file.key == key) {
                     currTabsList.push(file);
@@ -55,9 +50,6 @@ export const Tabs = ({files, selectFile, systemTree}) => {
                     setTabsList(currTabsList);
                 }
             });
-        } else {
-            setActiveTab(key);
-            selectFile(key);
         }
     }
 
@@ -77,6 +69,7 @@ export const Tabs = ({files, selectFile, systemTree}) => {
             selectFile(null);
             setActiveTab(null);
         } else {
+            // If its the last tab, use the last tab in the new tabs list.
             const newIndex = (index >= currTabsList.length)?currTabsList.length - 1:index;
             setActiveTab(currTabsList[newIndex].key);
             selectFile(currTabsList[newIndex].key);
@@ -140,6 +133,7 @@ export const Tabs = ({files, selectFile, systemTree}) => {
                     </Dropdown>
                 }
             </div>
+
         </div>
     );
 }
