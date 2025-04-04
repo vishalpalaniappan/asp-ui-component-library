@@ -10,14 +10,16 @@ import { Tabs } from "./Tabs/Tabs";
  * 
  * @return {JSX}
  */
-export const Viewer = ({systemTree}) => {
+export const Viewer = ({systemTree, onFileSelect}) => {
 
     const [files, setFiles] = useState();
     const [fileContent, setFileContent] = useState();
     const [editorContent, setEditorContent] = useState();
 
-    // Parse system tree into list with necessary information for tabs component
+    // Flatten system tree into list with necessary information for tabs component
     useEffect(() => {
+
+        // Store the files meta and content separately
         const files = [];
         const content = {};
 
@@ -38,6 +40,7 @@ export const Viewer = ({systemTree}) => {
         }
 
         if (files.length == 0) {
+            // TODO: Replace monaco editor with prompt until a tab is added
             setEditorContent("Select file using file navigator or drop down on top right.");
             setFileContent({});
             setFiles([]);
@@ -51,7 +54,9 @@ export const Viewer = ({systemTree}) => {
 
     const selectFile = (fileKey) => {
         if (fileKey) {
+            let file = files.find((tab) => tab.key == fileKey)
             setEditorContent(fileContent[fileKey]);
+            onFileSelect(file);
         } else {
             setEditorContent("Select file using drop down on top right.");
         }
@@ -59,19 +64,17 @@ export const Viewer = ({systemTree}) => {
     
     return (
         <div className="viewerContainer d-flex flex-column">
-
             <div className="tabsGutter">
                 <Tabs files={files} selectFile={selectFile} systemTree={systemTree}/>
             </div>
-
             <div className="d-flex flex-grow-1">
                 <MonacoInstance editorContent={editorContent}/>
             </div>
-
         </div>
     );
 }
 
 Viewer.propTypes = {
-    systemTree: PropTypes.object
+    systemTree: PropTypes.object,
+    onFileSelect: PropTypes.func
 }
