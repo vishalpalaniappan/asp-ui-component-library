@@ -10,18 +10,12 @@ import 'bootstrap/dist/css/bootstrap.css';
 
 import Dropdown from 'react-bootstrap/Dropdown';
 
-// The forwardRef is important!!
 // Dropdown needs access to the DOM node in order to position the Menu
 const SelectFileToggle = React.forwardRef(({ children, onClick }, ref) => (
-    <a
-      href=""
-      ref={ref}
-      onClick={(e) => {
-        e.preventDefault();
-        onClick(e);
-      }}
-    >
-      {children}
+    <a  href=""
+        ref={ref}
+        onClick={(e) => { e.preventDefault(); onClick(e); }}>
+        {children}
     </a>
 ));
 
@@ -43,8 +37,6 @@ export const Tabs = ({files, selectFile, systemTree}) => {
 
     // Add a tab
     const addTab = (key) => {
-        // setActiveTab(file.key);
-        // selectFile(file.key)
         const currTabsList = [...tabsList];
 
         let hasKey;
@@ -104,6 +96,9 @@ export const Tabs = ({files, selectFile, systemTree}) => {
             }
             items.push(<Dropdown.Divider />);
         }
+
+        // Remove last divider
+        items.pop();
 
         return items;
     }
