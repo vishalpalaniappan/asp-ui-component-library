@@ -29,7 +29,10 @@ export const Tab = ({file, activeTab, selectTab, closeTab}) => {
             <div className="fileName">
                 {file.fileName}
             </div>
-            <div className="close" onClick={(e) => closeTab(e, file)}>
+            <div className="close" onClick={(e) => {
+                e.stopPropagation();
+                closeTab(e, file);
+            }}>
                 <X style={{color:"white"}}/>
             </div>
         </div>
@@ -41,7 +44,8 @@ Tab.propTypes = {
         key: PropTypes.string.isRequired,
         fileName: PropTypes.oneOfType([PropTypes.string, PropTypes.array]).isRequired,
         path: PropTypes.string
-    }),
-    isActive: PropTypes.string,
-    selectTab: PropTypes.func
+    }).isRequired,
+    isActive: PropTypes.string.isRequired,
+    selectTab: PropTypes.func.isRequired,
+    closeTab: PropTypes.func.isRequired
 }

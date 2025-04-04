@@ -85,6 +85,11 @@ export const Tabs = ({files, selectFile, systemTree}) => {
     const generateDropdown = () => {
         const items = [];
 
+        if (!systemTree) {
+            return items;
+        }
+
+        // Build files list from system tree
         for (const program in systemTree) {
             items.push(<Dropdown.Header>{program}</Dropdown.Header>);
             for (const fileName in systemTree[program]) {
@@ -103,10 +108,10 @@ export const Tabs = ({files, selectFile, systemTree}) => {
     }
 
     useEffect(() => {
-        if (files) {    
+        if (files && files.length > 0) {    
             setTabsList(files);
             setActiveTab(files[0].key);
-            selectFile(files[0].key)
+            selectFile(files[0].key);
         }
     }, [files]);
     
@@ -118,7 +123,7 @@ export const Tabs = ({files, selectFile, systemTree}) => {
                 {tabsList.map(function(file) {
                     return <Tab 
                         file={file} 
-                        key={file.path} 
+                        key={file.key} 
                         activeTab={activeTab} 
                         selectTab={selectTab}
                         closeTab={closeTab}
