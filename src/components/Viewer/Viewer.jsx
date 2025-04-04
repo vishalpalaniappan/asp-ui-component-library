@@ -54,9 +54,13 @@ export const Viewer = ({systemTree, onFileSelect}) => {
 
     const selectFile = (fileKey) => {
         if (fileKey) {
-            let file = files.find((tab) => tab.key == fileKey)
-            setEditorContent(fileContent[fileKey]);
-            onFileSelect(file);
+            if (files && fileContent) {
+                let file = files.find((tab) => tab.key === fileKey)
+                setEditorContent(fileContent[fileKey]);
+                if (onFileSelect && file) {
+                    onFileSelect(file);
+                }
+            }
         } else {
             setEditorContent("Select file using drop down on top right.");
         }
