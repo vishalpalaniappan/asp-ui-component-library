@@ -52,7 +52,7 @@ export const Viewer = ({systemTree}) => {
         if (fileKey) {
             setEditorContent(fileContent[fileKey]);
         } else {
-            setEditorContent("Select file using file navigator or drop down on top right.");
+            setEditorContent("Select file using drop down on top right.");
         }
     }
     

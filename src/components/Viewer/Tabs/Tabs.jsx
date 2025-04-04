@@ -19,6 +19,12 @@ const SelectFileToggle = React.forwardRef(({ children, onClick }, ref) => (
 /**
  * Renders the tabs component.
  * 
+ * The tabs component accepts a list of files which have been flattened from
+ * its system tree structure with a unique id. 
+ * 
+ * It allows you to add a tab, close a tab and select add new tabs using the 
+ * file drop down.
+ * 
  * @return {JSX}
  */
 export const Tabs = ({files, selectFile, systemTree}) => {
@@ -124,8 +130,8 @@ export const Tabs = ({files, selectFile, systemTree}) => {
                 {
                     (files && files.length > 0) &&
                     <Dropdown data-bs-theme="dark">
-                        <Dropdown.Toggle as={SelectFileToggle} id="dropdown-custom-components">
-                            <ChevronDown style={{color:"white"}}/>
+                        <Dropdown.Toggle as={SelectFileToggle}>
+                            <ChevronDown className="chevron" />
                         </Dropdown.Toggle>
                         <Dropdown.Menu>
                             {generateDropdown()}
@@ -140,5 +146,6 @@ export const Tabs = ({files, selectFile, systemTree}) => {
 
 Tabs.propTypes = {
     files: PropTypes.array,
-    selectFile: PropTypes.func
+    selectFile: PropTypes.func,
+    systemTree: PropTypes.object
 }

@@ -3,9 +3,16 @@ import PropTypes from 'prop-types';
 
 import { X } from "react-bootstrap-icons";
 
+const tabColors = {
+    active: "#1e1e1e",
+    disabled: "#2d2d2d"
+}
 
 /**
  * Renders the tab component.
+ * 
+ * The tab component displays the file name and an option 
+ * to close a tab. It also sets the style for the active tab.
  * 
  * @return {JSX}
  */
@@ -13,7 +20,7 @@ export const Tab = ({file, activeTab, selectTab, closeTab}) => {
 
     const getTabStyle = () => {
         return {
-            backgroundColor: (activeTab == file.key)?'#1e1e1e':'#2d2d2d'
+            backgroundColor: (activeTab == file.key)?tabColors.active:tabColors.disabled
         };
     }
 
