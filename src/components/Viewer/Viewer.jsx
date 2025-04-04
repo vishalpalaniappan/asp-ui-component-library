@@ -21,6 +21,7 @@ export const Viewer = ({systemTree}) => {
         const files = [];
         const content = {};
 
+        // Flatten system tree and assign key to each file in the program.
         for (const program in systemTree) {
             for (const filePath in systemTree[program]) {
                 const file = systemTree[program][filePath];
@@ -72,4 +73,5 @@ export const Viewer = ({systemTree}) => {
 }
 
 Viewer.propTypes = {
+    systemTree: PropTypes.object
 }

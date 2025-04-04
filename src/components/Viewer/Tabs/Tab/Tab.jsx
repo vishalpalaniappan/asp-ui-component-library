@@ -37,7 +37,11 @@ export const Tab = ({file, activeTab, selectTab, closeTab}) => {
 }
 
 Tab.propTypes = {
-    file: PropTypes.array,
+    file: PropTypes.shape({
+        key: PropTypes.string.isRequired,
+        fileName: PropTypes.oneOfType([PropTypes.string, PropTypes.array]).isRequired,
+        path: PropTypes.string
+    }),
     isActive: PropTypes.string,
     selectTab: PropTypes.func
 }
