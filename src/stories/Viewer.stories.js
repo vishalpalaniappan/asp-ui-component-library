@@ -14,6 +14,16 @@ export default {
 };
 
 const Template = (args) => {
+    const [, updateArgs] = useArgs();
+
+    const onFileSelect = (selectedFile) => {
+        action('Selected Stack Position:')(selectedFile);
+    }
+
+    useEffect(() => {
+        updateArgs({onFileSelect : onFileSelect});
+    }, []);
+
     return (
         <div className="viewerContainer">
             <Viewer {...args} />
