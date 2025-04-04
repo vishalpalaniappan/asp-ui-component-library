@@ -89,7 +89,7 @@ export const Tabs = ({files, selectFile, systemTree}) => {
             return items;
         }
 
-        // Build files list from system tree
+        // Build files list from system
         for (const program in systemTree) {
             items.push(<Dropdown.Header>{program}</Dropdown.Header>);
             for (const fileName in systemTree[program]) {

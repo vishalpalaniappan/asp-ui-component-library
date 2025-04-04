@@ -68,7 +68,7 @@ export const Viewer = ({systemTree, onFileSelect}) => {
     
     return (
         <div className="viewerContainer d-flex flex-column">
-            <div className="tabsGutter">
+            <div>
                 <Tabs files={files} selectFile={selectFile} systemTree={systemTree}/>
             </div>
             <div className="d-flex flex-grow-1">

@@ -3,7 +3,7 @@ import { Viewer } from "../components/Viewer";
 import { useArgs } from "@storybook/preview-api";
 import { action } from "@storybook/addon-actions";
 
-import fileTrees from "./filetree.json";
+import fileTrees from "./data/filetree.json";
 
 import "./ViewerStories.scss"
 

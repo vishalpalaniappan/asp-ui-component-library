@@ -25,9 +25,8 @@ export const MonacoInstance = ({editorContent}) => {
 
     return (
         <Editor
-            height="100vh"
             defaultLanguage="python"
-            defaultValue="// some comment"
+            defaultValue=""
             onMount={handleEditorDidMount}
             theme="vs-dark"
             options={{
