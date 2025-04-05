@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import "./SystemTrace.scss";
 import PropTypes from 'prop-types';
+import { ProgramStack } from "./ProgramStack/ProgramStack";
 
 /**
  * Renders the system trace component.
@@ -16,22 +17,16 @@ export const SystemTrace = ({traceEvents}) => {
 
     useEffect(() => {
         const keys = Object.keys(traceEvents);
-        const events = traceEvents[keys[0]];
+        const events = traceEvents[keys[66]];
 
         const traceList = [];
 
-        const uniqueId = keys[0];
+        const uniqueId = keys[66];
         for (const program of events) {
-            const fileName = program.fileName.split("/").pop();
-            const name = <div className="programName">{fileName}</div>
-            traceList.push(name);
-
-            for (const position of program.trace) {
-                const name = <div className="stackPosition">{position.name}</div>
-                traceList.push(name);
-            }
+            traceList.push(
+                <ProgramStack program={program} />
+            )
         }
-
         setTraceItems(traceList);
     }, []);
 
