@@ -28,11 +28,7 @@ export const FunctionStack = ({trace, min, max}) => {
 
     return (
         <div className="traceLine d-flex flex-row">
-            <div className="funcName">{trace.name}</div>
-            <div className="d-flex flex-grow-1 traceGraph">
-
-                <div style={graphStyle}></div>
-            </div>
+            <div style={graphStyle}></div>
         </div>
     );
 }

@@ -2,8 +2,10 @@ import { useEffect, useState, useRef } from "react";
 import "./ProgramStack.scss";
 import PropTypes from 'prop-types';
 import { traverse } from "@babel/core";
-
+import Table from 'react-bootstrap/Table';
 import { FunctionStack } from "../FunctionStack/FunctionStack";
+
+import { ChevronRight } from "react-bootstrap-icons";
 
 /**
  * Renders the system trace component.
@@ -42,10 +44,17 @@ export const ProgramStack = ({program}) => {
         for (const trace of program.trace) {
             const currLevel = trace.level - minStack.current;
             programDiv.push(
-                <FunctionStack trace={trace}
-                    min={minStack.current}
-                    max={maxStack.current} 
-                />
+                <tr >
+                    <td style={{width:"10px"}}><ChevronRight /></td>
+                    <td style={{width:"100px"}}>{trace.name}</td>
+                    <td>
+                        <FunctionStack 
+                            trace={trace}
+                            min={minStack.current}
+                            max={maxStack.current} />
+                    </td>
+                </tr>
+                
             )
         }
         
@@ -64,7 +73,19 @@ export const ProgramStack = ({program}) => {
                 {programName}
             </div>
             <div>
-                {programList}
+                <Table>
+                    <thead>
+                        <tr>
+                            <th style={{width:"10px"}}></th>
+                            <th style={{width:"100px"}}>Function</th>
+                            <th>Stack Level</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {programList}
+                    </tbody>
+
+                </Table>
             </div>
         </div>
     );
