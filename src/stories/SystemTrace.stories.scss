@@ -1,0 +1,24 @@
+.systemTraceContainer{
+    position: absolute;
+    top:0;
+    bottom:0;
+    left:0;
+    right:0;
+    background-color: #333333;
+}
+
+.rootContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    padding: 100px;
+}
+
+.stackContainer {
+    height: 300px;
+    width: 300px;
+    background-color: #1b1c1d;
+    font-size: 15px;
+    font-family: sans-serif;
+}
