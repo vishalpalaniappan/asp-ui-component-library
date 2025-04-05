@@ -15,9 +15,9 @@ export default {
 
 const Template = (args) => {
     return (
-        <div className="systemTraceContainer">
-            <div class="rootContainer">
-                <div class="stackContainer">
+        <div className="systemBodyContainer">
+            <div class="systemCenterContainer">
+                <div class="systemStackContainer">
                     <SystemTrace {...args} />
                 </div>
             </div>

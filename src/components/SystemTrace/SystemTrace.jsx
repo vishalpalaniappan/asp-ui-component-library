@@ -10,29 +10,53 @@ import { ProgramStack } from "./ProgramStack/ProgramStack";
  * @return {JSX}
  */
 export const SystemTrace = ({traceEvents}) => {
-
-    console.log(traceEvents);
-
     const [traceItems, setTraceItems] = useState(<></>);
+    const [traceKeys, setTraceKeys] = useState([]);
 
-    useEffect(() => {
-        const keys = Object.keys(traceEvents);
-        const events = traceEvents[keys[66]];
-
+    const setTraceEvents = (events) => {
         const traceList = [];
-
-        const uniqueId = keys[66];
         for (const program of events) {
             traceList.push(
                 <ProgramStack program={program} />
             )
         }
         setTraceItems(traceList);
-    }, []);
+    }
+
+    const onSelectTrace = (e) => {
+        setTraceEvents(traceEvents[e.target.value])
+    }
+
+    useEffect(() => {
+        const keys = Object.keys(traceEvents);
+        setTraceKeys(keys);
+        setTraceEvents(traceEvents[keys[0]]);
+    }, [traceEvents]);
+
+
+    const getTraceKeys = () => {
+        if (traceKeys) {
+            const keys = [];
+            traceKeys.forEach((key, index) => {
+                keys.push(
+                    <option id={key}>{key}</option>
+                );
+            });
+            return keys;
+        }
+    }
 
     return (
         <div className="traceContainer">
-            {traceItems}
+            <div className="traceSelectContainer">
+                <label for="trace-select">Select Trace</label>
+                <select id="trace-select" className="traceSelector flex-grow-1" onChange={onSelectTrace}>
+                    {getTraceKeys()}
+                </select>
+            </div>
+            <div className="traceItems">
+                {traceItems}
+            </div>
         </div>
     );
 }

@@ -10,8 +10,6 @@ import { traverse } from "@babel/core";
  */
 export const FunctionStack = ({trace, min, max}) => {
 
-    console.log(trace, min, max);
-
     const [graphStyle, setGraphStyle] = useState({
         height: "100%",
         background: "#2b91af"
@@ -21,7 +19,6 @@ export const FunctionStack = ({trace, min, max}) => {
     useEffect(() => {
         let percentage = (trace.level-min+ 1)/(max-min + 1);
         percentage = Math.floor(percentage * 100);
-        console.log(percentage);
         const newStyle = {
             ...graphStyle,
             width: percentage + "%"

@@ -1,4 +1,4 @@
-.systemTraceContainer{
+.systemBodyContainer{
     position: absolute;
     top:0;
     bottom:0;
@@ -7,7 +7,7 @@
     background-color: #333333;
 }
 
-.rootContainer {
+.systemCenterContainer {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -15,9 +15,9 @@
     padding: 100px;
 }
 
-.stackContainer {
+.systemStackContainer {
     height: 300px;
-    width: 300px;
+    width: 400px;
     background-color: #1b1c1d;
     font-size: 15px;
     font-family: sans-serif;
