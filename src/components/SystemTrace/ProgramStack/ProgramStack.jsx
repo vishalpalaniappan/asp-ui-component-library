@@ -71,7 +71,13 @@ export const ProgramStack = ({program}) => {
                         {getChevron(isCollapsable, trace, i)}
                     </td>
                     <td style={{width:"100px"}}>{trace.name}</td>
-                    <td style={{textAlign:"center"}}>Level:{trace.level}</td>
+                    <td style={{textAlign:"center"}}>
+                        <FunctionStack 
+                            trace={trace} 
+                            min={minStack.current}
+                            max={maxStack.current}
+                        />
+                    </td>
                 </tr>
                 
             )
