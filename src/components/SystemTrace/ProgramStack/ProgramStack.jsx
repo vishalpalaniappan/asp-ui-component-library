@@ -43,7 +43,7 @@ export const ProgramStack = ({program}) => {
                 return <ChevronDown onClick={(e) => toggleCollapse(e, index)}/>   
             }
         } else {
-            return <Dash />
+            return <Dash style={{opacity:0}}/>
         }
     }
 
@@ -78,8 +78,7 @@ export const ProgramStack = ({program}) => {
                             max={maxStack.current}
                         />
                     </td>
-                </tr>
-                
+                </tr>                
             )
             
             // If its collapsed, increment the index until a lower level is reached.
