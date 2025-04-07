@@ -1,7 +1,12 @@
-.programContainer {
-    color:white;
+.programContainer {    
+    color:grey;
 }
 
+.programNameContainer{
+    text-align:center;
+    padding:5px;
+    background-color: #222222;
+}
 
 
 th {
@@ -11,6 +16,7 @@ th {
     // padding: 5px !important;
     font-weight: normal;
     border-bottom: none !important;
+    color: grey !important;
 }
 
 td {
@@ -18,4 +24,9 @@ td {
     margin:0;
     height: 10px !important;
     border-bottom: none !important;
+    color: white !important;
+}
+
+.table > :not(caption) > * > * {
+    background-color: transparent !important;
 }

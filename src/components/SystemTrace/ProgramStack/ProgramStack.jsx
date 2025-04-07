@@ -5,7 +5,7 @@ import { traverse } from "@babel/core";
 import Table from 'react-bootstrap/Table';
 import { FunctionStack } from "../FunctionStack/FunctionStack";
 
-import { ChevronRight } from "react-bootstrap-icons";
+import { ChevronRight, ChevronDown, Dash } from "react-bootstrap-icons";
 
 /**
  * Renders the system trace component.
@@ -14,6 +14,7 @@ import { ChevronRight } from "react-bootstrap-icons";
  */
 export const ProgramStack = ({program}) => {
 
+    const [trace, setTrace] = useState();
     const [programList, setProgramList] = useState(<></>);
     const [programName, setProgramName] = useState();
 
@@ -27,43 +28,78 @@ export const ProgramStack = ({program}) => {
         setProgramName(programName);
     }
 
-    const processTrace = (trace) => {
-        for (const node in trace) {
-            maxStack.current = (maxStack.current < trace.level)?trace.level:maxStack.current;
+    const toggleCollapse = (e, index) => {
+        console.log(trace, index);
+        const traceCopy = [...trace];
+        traceCopy[index]["isCollapsed"] = !traceCopy[index]["isCollapsed"];
+        setTrace(traceCopy);
+    }
+
+    const getChevron = (isCollapsable, trace, index) => {
+        if (isCollapsable) {
+            if (trace["isCollapsed"]) {
+                return <ChevronRight onClick={(e) => toggleCollapse(e, index)}/>
+            } else {
+                return <ChevronDown onClick={(e) => toggleCollapse(e, index)}/>   
+            }
+        } else {
+            return <Dash />
         }
     }
 
-
-    const processProgram = (program) => {
-        getProgramNameFromPath(program.fileName);
-
-        minStack.current = Math.min(...program.trace.map(o => o.level));
-        maxStack.current = Math.max(...program.trace.map(o => o.level));
+    const processProgram = (traces) => {
+        minStack.current = Math.min(...traces.map(o => o.level));
+        maxStack.current = Math.max(...traces.map(o => o.level));
 
         const programDiv = [];
-        for (const trace of program.trace) {
-            const currLevel = trace.level - minStack.current;
+        let i = 0;
+        do {
+            const trace = traces[i];
+
+            // Determine if the current trace position can be collapsed
+            let isCollapsable;
+            if (i == traces.length - 1) {
+                isCollapsable = false;
+            } else {
+                isCollapsable = (traces.length == 1)? false:traces[i].level < traces[i+1].level;
+            }
+                    
+            // Push the current trace level
             programDiv.push(
                 <tr >
-                    <td style={{width:"10px"}}><ChevronRight /></td>
-                    <td style={{width:"100px"}}>{trace.name}</td>
-                    <td>
-                        <FunctionStack 
-                            trace={trace}
-                            min={minStack.current}
-                            max={maxStack.current} />
+                    <td style={{width:"10px"}}>
+                        {getChevron(isCollapsable, trace, i)}
                     </td>
+                    <td style={{width:"100px"}}>{trace.name}</td>
+                    <td style={{textAlign:"center"}}>Level:{trace.level}</td>
                 </tr>
                 
             )
-        }
+            
+            // If its collapsed, increment the index until a lower level is reached.
+            const startLevel = traces[i].level.valueOf();
+            i++;
+            if (trace["isCollapsed"] ) {       
+                while (i < traces.length && startLevel < traces[i].level) {
+                    console.log(i)                 
+                    i++;
+                }
+            }            
+        } while ( i < traces.length);
         
         setProgramList(programDiv);
     }
 
     useEffect(() => {
+        if (trace) {
+            processProgram(trace)            
+        }
+    }, [trace]);
+
+    useEffect(() => {
         if (program) {
-            processProgram(program);
+            setTrace(program.trace);
+            getProgramNameFromPath(program.fileName);
         }
     }, [program]);
 
