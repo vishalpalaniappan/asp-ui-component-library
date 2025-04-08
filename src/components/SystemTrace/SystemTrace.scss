@@ -14,10 +14,20 @@
 .traceSelectContainer {
     padding:10px;
     color:white;
+    margin-bottom:30px;
+    border-bottom: solid 2px grey;
 }
 
 .traceSelector {
     width: 100%;
+    background-color: transparent;
+    color:white;
+    border:none;
+}
+
+.traceSelector > option{
+    background-color: #333333;
+    color:white;
 }
 
 .traceItems {

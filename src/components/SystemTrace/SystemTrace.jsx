@@ -39,7 +39,7 @@ export const SystemTrace = ({traceEvents}) => {
             const keys = [];
             traceKeys.forEach((key, index) => {
                 keys.push(
-                    <option id={key}>{key}</option>
+                    <option id={key} className="options">{key}</option>
                 );
             });
             return keys;
@@ -47,17 +47,21 @@ export const SystemTrace = ({traceEvents}) => {
     }
 
     return (
-        <div className="traceContainer">
-            <div className="traceSelectContainer">
-                <label for="trace-select">Select Trace</label>
-                <select id="trace-select" className="traceSelector flex-grow-1" onChange={onSelectTrace}>
-                    {getTraceKeys()}
-                </select>
+
+        <>
+            <div className="traceContainer">
+                <div className="traceSelectContainer">
+                    {/* <label for="trace-select">Select Trace</label> */}
+                    <select id="trace-select" className="traceSelector flex-grow-1" onChange={onSelectTrace}>
+                        {getTraceKeys()}
+                    </select>
+                </div>
+                <div className="traceItems">
+                    {traceItems}
+                </div>
             </div>
-            <div className="traceItems">
-                {traceItems}
-            </div>
-        </div>
+        
+        </>
     );
 }
 

@@ -1,18 +1,20 @@
 import { useEffect, useState, useRef } from "react";
 import "./FunctionStack.scss";
 import PropTypes from 'prop-types';
-import { traverse } from "@babel/core";
+import { PlusCircle } from "react-bootstrap-icons";
 
 /**
  * Renders the function stack component.
  * 
  * @return {JSX}
  */
-export const FunctionStack = ({trace, min, max}) => {
+export const FunctionStack = ({trace, min, max, numOfChildren}) => {
+
+    console.log(numOfChildren);
 
     const [graphStyle, setGraphStyle] = useState({
         height: "100%",
-        background: "#2b91af"
+        background: "#143d49"
     })
 
 
@@ -29,7 +31,12 @@ export const FunctionStack = ({trace, min, max}) => {
     return (
         <div className="traceLine d-flex flex-row">
             {/* <div className="overlay">Min:{min-min + 1} Max:{max-min + 1} {trace.level - min + 1}</div> */}
-            <div className="overlay">{trace.name}</div>
+            <div className="overlay">
+                <div style={{float:"left"}}>{trace.name}</div>
+                {numOfChildren > 0 && 
+                    <div style={{float:"right"}}>{numOfChildren}</div>
+                }
+            </div>
             <div style={graphStyle}></div>
         </div>
     );

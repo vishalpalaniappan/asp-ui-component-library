@@ -65,23 +65,8 @@ export const ProgramStack = ({program}) => {
             } else {
                 isCollapsable = (traces.length == 1)? false: traces[i].level < traces[i+1].level;
             }
-                    
-            // Push the current trace level.
-            programDiv.push(
-                <tr key={trace.name + String(Math.random().toString(36).substring(2,7))}>
-                    <td style={{width:"10px"}}>
-                        {getChevron(isCollapsable, trace, i)}
-                    </td>
-                    {/* <td style={{width:"100px"}}>{trace.name}</td> */}
-                    <td style={{textAlign:"center"}}>
-                        <FunctionStack 
-                            trace={Object.assign({},trace)} 
-                            min={minStack.current}
-                            max={maxStack.current}
-                        />
-                    </td>
-                </tr>                
-            )
+
+            const startIndex = i.valueOf();
             
             // If its collapsed, increment the index until a lower level is reached.
             const startLevel = traces[i].level.valueOf();
@@ -92,6 +77,25 @@ export const ProgramStack = ({program}) => {
             } else {
                 i++;
             }
+        
+            const numOfChildren = i - startIndex - 1;
+            // Push the current trace level.
+            programDiv.push(
+                <tr key={trace.name + String(Math.random().toString(36).substring(2,7))}>
+                    <td style={{width:"10px"}}>
+                        {getChevron(isCollapsable, trace, startIndex)}
+                    </td>
+                    {/* <td style={{width:"100px"}}>{trace.name}</td> */}
+                    <td style={{textAlign:"center"}}>
+                        <FunctionStack 
+                            trace={Object.assign({},trace)} 
+                            min={minStack.current}
+                            max={maxStack.current}
+                            numOfChildren={numOfChildren}
+                        />
+                    </td>
+                </tr>                
+            )
 
         } while ( i < traces.length);
         
@@ -118,13 +122,13 @@ export const ProgramStack = ({program}) => {
             </div>
             <div>
                 <Table>
-                    <thead>
+                    {/* <thead>
                         <tr>
                             <th style={{width:"10px"}}></th>
-                            {/* <th style={{width:"100px"}}>Function</th> */}
+                            <th style={{width:"100px"}}>Function</th> }
                             <th>Stack Level</th>
                         </tr>
-                    </thead>
+                    </thead> */}
                     <tbody>
                         {programList}
                     </tbody>
