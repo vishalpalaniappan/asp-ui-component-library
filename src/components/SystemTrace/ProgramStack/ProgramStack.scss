@@ -1,0 +1,31 @@
+.programContainer {    
+    color:grey;
+}
+
+.programNameContainer{
+    text-align:center;
+    padding:5px;
+}
+
+
+th {
+    height: 10px !important;
+    margin:0 !important;
+    padding: 2px 5px !important;
+    // padding: 5px !important;
+    font-weight: normal;
+    border-bottom: none !important;
+    color: grey !important;
+}
+
+td {
+    padding:5px !important;
+    margin:0;
+    height: 10px !important;
+    border-bottom: none !important;
+    color: white !important;
+}
+
+.table > :not(caption) > * > * {
+    background-color: transparent !important;
+}

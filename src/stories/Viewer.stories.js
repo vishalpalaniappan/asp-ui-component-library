@@ -33,8 +33,6 @@ const Template = (args) => {
 
 export const Default = Template.bind({})
 
-console.log(fileTrees);
-
 Default.args = {
     systemTree: fileTrees.fileTrees
 }

@@ -1,0 +1,39 @@
+
+
+.traceContainer {
+    width:100%;
+    height:100%;
+    scrollbar-gutter: stable;
+    scrollbar-color: rgba(71, 71, 71, .4) #252526;
+    scrollbar-width: thin;
+    font-size: 14px;
+    display: flex;
+    flex-direction: column;
+}
+
+.traceSelectContainer {
+    padding:10px;
+    color:white;
+    margin-bottom:30px;
+    border-bottom: solid 2px grey;
+}
+
+.traceSelector {
+    width: 100%;
+    background-color: transparent;
+    color:white;
+    border:none;
+}
+
+.traceSelector > option{
+    background-color: #333333;
+    color:white;
+}
+
+.traceItems {
+    display:flex;
+    flex-direction: column;
+    flex-grow: 1;
+    overflow-y:auto;
+}
+
