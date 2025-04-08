@@ -6,6 +6,7 @@ import Table from 'react-bootstrap/Table';
 import { FunctionStack } from "../FunctionStack/FunctionStack";
 
 import { ChevronRight, ChevronDown, Dash } from "react-bootstrap-icons";
+import { P } from "storybook/internal/components";
 
 /**
  * Renders the system trace component.
@@ -54,26 +55,27 @@ export const ProgramStack = ({program}) => {
         const programDiv = [];
         let i = 0;
         do {
+            // Get trace
             const trace = traces[i];
 
-            // Determine if the current trace position can be collapsed
+            // Determine if the current trace position can be collapsed.
             let isCollapsable;
             if (i == traces.length - 1) {
                 isCollapsable = false;
             } else {
-                isCollapsable = (traces.length == 1)? false:traces[i].level < traces[i+1].level;
+                isCollapsable = (traces.length == 1)? false: traces[i].level < traces[i+1].level;
             }
                     
-            // Push the current trace level
+            // Push the current trace level.
             programDiv.push(
-                <tr >
+                <tr key={trace.name + String(Math.random().toString(36).substring(2,7))}>
                     <td style={{width:"10px"}}>
                         {getChevron(isCollapsable, trace, i)}
                     </td>
                     <td style={{width:"100px"}}>{trace.name}</td>
                     <td style={{textAlign:"center"}}>
                         <FunctionStack 
-                            trace={trace} 
+                            trace={Object.assign({},trace)} 
                             min={minStack.current}
                             max={maxStack.current}
                         />
@@ -83,13 +85,14 @@ export const ProgramStack = ({program}) => {
             
             // If its collapsed, increment the index until a lower level is reached.
             const startLevel = traces[i].level.valueOf();
-            i++;
-            if (trace["isCollapsed"] ) {       
-                while (i < traces.length && startLevel < traces[i].level) {
-                    console.log(i)                 
+            if (trace["isCollapsed"]) {       
+                do {
                     i++;
-                }
-            }            
+                } while(i < traces.length && startLevel < traces[i].level);
+            } else {
+                i++;
+            }
+
         } while ( i < traces.length);
         
         setProgramList(programDiv);

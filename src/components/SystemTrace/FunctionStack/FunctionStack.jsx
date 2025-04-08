@@ -30,7 +30,7 @@ export const FunctionStack = ({trace, min, max}) => {
 
     return (
         <div className="traceLine d-flex flex-row">
-            <div className="overlay">{trace.level - min + 1}</div>
+            <div className="overlay">Min:{min-min + 1} Max:{max-min + 1} {trace.level - min + 1}</div>
             <div style={graphStyle}></div>
         </div>
     );
