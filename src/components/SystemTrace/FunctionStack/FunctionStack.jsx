@@ -10,8 +10,6 @@ import { traverse } from "@babel/core";
  */
 export const FunctionStack = ({trace, min, max}) => {
 
-    console.log( trace.level, min, max);
-
     const [graphStyle, setGraphStyle] = useState({
         height: "100%",
         background: "#2b91af"
@@ -19,7 +17,7 @@ export const FunctionStack = ({trace, min, max}) => {
 
 
     useEffect(() => {
-        let percentage = (trace.level-min)/(max-min);
+        let percentage = (trace.level-min+1)/(max-min+1);
         percentage = Math.floor(percentage * 100);
         const newStyle = {
             ...graphStyle,
@@ -30,7 +28,8 @@ export const FunctionStack = ({trace, min, max}) => {
 
     return (
         <div className="traceLine d-flex flex-row">
-            <div className="overlay">Min:{min-min + 1} Max:{max-min + 1} {trace.level - min + 1}</div>
+            {/* <div className="overlay">Min:{min-min + 1} Max:{max-min + 1} {trace.level - min + 1}</div> */}
+            <div className="overlay">{trace.name}</div>
             <div style={graphStyle}></div>
         </div>
     );

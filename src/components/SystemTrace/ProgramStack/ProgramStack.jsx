@@ -72,7 +72,7 @@ export const ProgramStack = ({program}) => {
                     <td style={{width:"10px"}}>
                         {getChevron(isCollapsable, trace, i)}
                     </td>
-                    <td style={{width:"100px"}}>{trace.name}</td>
+                    {/* <td style={{width:"100px"}}>{trace.name}</td> */}
                     <td style={{textAlign:"center"}}>
                         <FunctionStack 
                             trace={Object.assign({},trace)} 
@@ -107,7 +107,7 @@ export const ProgramStack = ({program}) => {
     useEffect(() => {
         if (program) {
             setTrace(program.trace);
-            getProgramNameFromPath(program.fileName);
+            getProgramNameFromPath(program.logFileName);
         }
     }, [program]);
 
@@ -121,7 +121,7 @@ export const ProgramStack = ({program}) => {
                     <thead>
                         <tr>
                             <th style={{width:"10px"}}></th>
-                            <th style={{width:"100px"}}>Function</th>
+                            {/* <th style={{width:"100px"}}>Function</th> */}
                             <th>Stack Level</th>
                         </tr>
                     </thead>
