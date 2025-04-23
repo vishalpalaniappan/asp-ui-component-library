@@ -1,25 +1,7 @@
-.rootContainer {
+.rootTraceContainer {
     position: absolute;
     top:0;
     bottom:0;
     left:0;
     right:0;
-    background-color: #0b0c0c;
-}
-
-.centerContainer {
-    width:100%;
-    height:100%;    
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: row;
-}
-
-.stackContainer {
-    display: flex;
-    justify-content: center;
-    height: 600px;
-    width: 600px;
-    background-color: #1b1c1d;
 }

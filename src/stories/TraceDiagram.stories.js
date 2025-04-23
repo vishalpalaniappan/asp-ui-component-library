@@ -14,12 +14,8 @@ export default {
 const Template = (args) => {
 
     return (
-        <div className="rootContainer">
-            <div className="centerContainer">
-                <div className="stackContainer">
-                    <TraceDiagram  {...args}/> 
-                </div>
-            </div>
+        <div className="rootTraceContainer">
+            <TraceDiagram  {...args}/> 
         </div>
     )
 }
