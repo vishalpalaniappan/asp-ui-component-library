@@ -61,6 +61,7 @@
     "react-dom": "^18.2.0"
   },
   "dependencies": {
+    "@dagrejs/dagre": "^1.1.4",
     "@monaco-editor/react": "^4.7.0",
     "@xyflow/react": "^12.6.0",
     "bootstrap": "^5.3.4",

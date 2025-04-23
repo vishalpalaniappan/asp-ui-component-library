@@ -1,116 +1,41 @@
-import { ChangeEventHandler, useCallback, useState } from "react";
+import { useCallback, useState } from "react";
 import {
   ReactFlow,
-  addEdge,
-  Node,
+  ReactFlowProvider,
   useNodesState,
   useEdgesState,
-  OnConnect,
-  Edge,
   MiniMap,
   Background,
   Controls,
   Panel,
-  ColorMode,
-  Position,
-  MarkerType 
+  useReactFlow
 } from "@xyflow/react";
-
 import "@xyflow/react/dist/style.css";
 
-const nodeDefaults = {
-  sourcePosition: Position.Bottom,
-  targetPosition: Position.Top,
-};
+import { initialNodes, initialEdges } from './SampleNodes.js';
+import { getLayoutedElements } from "./DagreLayout.js";
 
-const initialNodes = [
-  {
-    id: "A",
-    type: "input",
-    position: { x: 250, y: 0 },
-    data: { label: "Simulted Client" }
-  },
-  {
-    id: "B",
-    position: { x: 250, y: 150 },
-    data: { label: "Job Handler" }
-  },
-  {
-    id: "C",
-    position: { x: 250, y: 300 },
-    data: { label: "Bubble Sort Worker" }
-  },
-  {
-    id: "D",
-    position: { x: 250, y: 450 },
-    data: { label: "Job Handler" }
-  },
-  {
-    id: "E",
-    type: "output",
-    position: { x: 250, y: 600 },
-    data: { label: "Simulated Client" }
-  },
-];
-
-const marker = {
-  type: MarkerType.ArrowClosed,
-  width: 20,
-  height: 20,
-  color: '#FF0072',
-}
-
-const arrowStyle = {
-  strokeWidth: 2,
-  stroke: '#FF0072',
-}
-
-const initialEdges = [
-  {
-    id: "A-B",
-    source: "A",
-    target: "B",
-    animated: true,
-    markerEnd: marker,
-    style: arrowStyle,
-    label: 'Submit Random Job',
-  },
-  {
-    id: "B-C",
-    source: "B",
-    target: "C",
-    animated: true,
-    markerEnd: marker,
-    style: arrowStyle,
-    label: 'Distribute Storing Job to Worker',
-  },
-  {
-    id: "C-D",
-    source: "C",
-    target: "D",
-    animated: true,
-    markerEnd: marker,
-    style: arrowStyle,
-    label: 'Return Finished Job to Handler',
-  },
-  {
-    id: "D-E",
-    source: "D",
-    target: "E",
-    animated: true,
-    markerEnd: marker,
-    style: arrowStyle,
-    label: 'Return Finished Job to Client',
-  },
-];
-
-export const TraceDiagram = () => {
+const Flow = () => {
+  const { fitView } = useReactFlow();
   const [colorMode, setColorMode] = useState("dark");
-  const [nodes, , onNodesChange] = useNodesState(initialNodes);
+  const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
   const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
 
   const onChange = (evt) =>
     setColorMode(evt.target.value);
+
+  const onLayout = useCallback(
+    (direction) => {
+      console.log(nodes);
+      const layouted = getLayoutedElements(nodes, edges, { direction });
+ 
+      setNodes([...layouted.nodes]);
+      setEdges([...layouted.edges]);
+ 
+      fitView();
+    },
+    [nodes, edges],
+  );
 
   return (
     <ReactFlow
@@ -121,8 +46,6 @@ export const TraceDiagram = () => {
       colorMode={colorMode}
       fitView
     >
-      <MiniMap />
-      <Background />
       <Controls />
 
       <Panel position="top-right">
@@ -132,6 +55,19 @@ export const TraceDiagram = () => {
           <option value="system">system</option>
         </select>
       </Panel>
+
+      <Panel position="top-left">
+        <button onClick={() => onLayout('TB')}>vertical layout</button>
+        <button onClick={() => onLayout('LR')}>horizontal layout</button>
+      </Panel>
     </ReactFlow>
   );
 };
+
+export const TraceDiagram = (props) => {
+  return (
+    <ReactFlowProvider>
+      <Flow {...props} />
+    </ReactFlowProvider>
+  );
+}
