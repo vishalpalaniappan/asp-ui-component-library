@@ -58,7 +58,7 @@ export const initialEdges = [
     animated: true,
     markerEnd: marker,
     style: arrowStyle,
-    label: 'Submit Random Job',
+    // label: 'Submit Random Job',
   },
   {
     id: "B-C",
@@ -67,7 +67,7 @@ export const initialEdges = [
     animated: true,
     markerEnd: marker,
     style: arrowStyle,
-    label: 'Distribute Storing Job to Worker',
+    // label: 'Distribute Storing Job to Worker',
   },
   {
     id: "C-D",
@@ -76,7 +76,7 @@ export const initialEdges = [
     animated: true,
     markerEnd: marker,
     style: arrowStyle,
-    label: 'Return Finished Job to Handler',
+    // label: 'Return Finished Job to Handler',
   },
   {
     id: "D-E",
@@ -85,6 +85,6 @@ export const initialEdges = [
     animated: true,
     markerEnd: marker,
     style: arrowStyle,
-    label: 'Return Finished Job to Client',
+    // label: 'Return Finished Job to Client',
   },
 ];

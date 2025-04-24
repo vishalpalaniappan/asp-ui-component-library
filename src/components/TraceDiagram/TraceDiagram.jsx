@@ -1,4 +1,4 @@
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import {
   ReactFlow,
   ReactFlowProvider,
@@ -12,21 +12,20 @@ import {
 } from "@xyflow/react";
 import "@xyflow/react/dist/style.css";
 
-import { initialNodes, initialEdges } from './SampleNodes.js';
 import { getLayoutedElements } from "./DagreLayout.js";
+import { getNodesFromTrace } from "./helper.js"
 
-const Flow = () => {
+const Flow = ({trace}) => {
   const { fitView } = useReactFlow();
   const [colorMode, setColorMode] = useState("dark");
-  const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
-  const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
+  const [nodes, setNodes, onNodesChange] = useNodesState([]);
+  const [edges, setEdges, onEdgesChange] = useEdgesState([]);
 
   const onChange = (evt) =>
     setColorMode(evt.target.value);
 
   const onLayout = useCallback(
     (direction) => {
-      console.log(nodes);
       const layouted = getLayoutedElements(nodes, edges, { direction });
  
       setNodes([...layouted.nodes]);
@@ -36,6 +35,23 @@ const Flow = () => {
     },
     [nodes, edges],
   );
+
+  useEffect(() => {
+    if (trace) {
+      const flowInfo = getNodesFromTrace(trace);
+      
+      const layouted = getLayoutedElements(
+        flowInfo.nodes,
+        flowInfo.edges,
+        {direction:"TB"}
+      );
+
+      setNodes([...layouted.nodes]);
+      setEdges([...layouted.edges]);
+ 
+      fitView();
+    }
+  }, [trace]);
 
   return (
     <ReactFlow
@@ -64,10 +80,16 @@ const Flow = () => {
   );
 };
 
-export const TraceDiagram = (props) => {
+export const TraceDiagram = ({traces}) => {
+  const [traceList, setTraceList] = useState();
+
+  useEffect(() => {
+    setTraceList(traces[0])
+  }, [traces])
+
   return (
     <ReactFlowProvider>
-      <Flow {...props} />
+      <Flow trace={traceList} />
     </ReactFlowProvider>
   );
 }
