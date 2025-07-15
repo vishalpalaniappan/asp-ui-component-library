@@ -36,7 +36,3 @@ To test the library locally, use the following steps:
 - run `npm link asp-react-component-library` in the local application which will import the library 
 - You should now be able to import the component into the local application
 - run `npm run build` in the component library to push the changes to the local application
-
-Note: There are some issues with this workflow that are being resolved and will be addressed in a coming PR.
-
-
