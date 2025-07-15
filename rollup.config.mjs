@@ -4,17 +4,18 @@ import terser from '@rollup/plugin-terser';
 import external from 'rollup-plugin-peer-deps-external';
 import postcss from 'rollup-plugin-postcss';
 import { babel } from '@rollup/plugin-babel';
+import packageJson from "./package.json" assert { type: "json" };
 
 export default {
     input: 'src/index.js',
     output: [
         {
-            file: 'dist/cjs/index.js',
+            file: packageJson.main,
             format: 'cjs',
             sourcemap: true
         },
         {
-            file: 'dist/esm/index.js',
+            file: packageJson.module,
             format: 'esm',
             sourcemap: true,
         },
@@ -24,12 +25,12 @@ export default {
         resolve({
             extensions: ['.js', '.jsx'],
         }),
-        postcss(),
-        terser(),
         babel({
             babelHelpers: 'bundled',
             exclude: 'node_modules/**',
         }),
+        postcss(),
+        terser(),
         commonjs(),
     ]
 }
