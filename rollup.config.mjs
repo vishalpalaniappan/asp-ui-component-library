@@ -12,20 +12,25 @@ export default {
         {
             file: packageJson.main,
             format: 'cjs',
-            sourcemap: true,
+            sourcemap: true
         },
         {
             file: packageJson.module,
             format: 'esm',
-            sourcemap: true
-        }
+            sourcemap: true,
+        },
     ],
     plugins: [
-        external(),
-        resolve(),
+        external(['react', 'react-dom']),
+        resolve({
+            extensions: ['.js', '.jsx'],
+        }),
+        babel({
+            babelHelpers: 'bundled',
+            exclude: 'node_modules/**',
+        }),
         postcss(),
         terser(),
         commonjs(),
-        babel({ babelHelpers: 'bundled' })
     ]
 }
